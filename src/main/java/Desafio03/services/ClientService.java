@@ -54,7 +54,6 @@ public class ClientService {
 	
 	
 	
-	
 	public void CopyDtoToEntity(ClientDTO dto, Client client) {
 		client.setCpf(dto.getCpf());
 		client.setName(dto.getName());
