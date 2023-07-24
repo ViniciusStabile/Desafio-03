@@ -1,9 +1,9 @@
 package Desafio03.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,11 +23,11 @@ public class ClientService {
 	private ClientRepository repository;
 
 	@Transactional(readOnly = true)
-	public List<ClientDTO> findAll() {
+	public Page<ClientDTO> findAll(Pageable pageable) {
 
 		try {
-			List<Client> list = repository.findAll();
-			return list.stream().map(x -> new ClientDTO(x)).toList();
+			Page<Client> list = repository.findAll(pageable);
+			return list.map(x -> new ClientDTO(x));
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("resource not found");
 		}

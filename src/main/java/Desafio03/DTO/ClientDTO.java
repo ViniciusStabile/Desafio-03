@@ -4,17 +4,19 @@ import java.time.LocalDate;
 
 import Desafio03.entities.Client;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 public class ClientDTO {
 
 	private Long id;
-	@Size(min = 2)
+	@Size(min = 2, max = 150)
 	@NotBlank(message = "Invalid")
 	private String name;
 	@Size(min = 11, max = 11)
 	@NotBlank(message = "Invalid")
 	private String cpf;
+	@Positive(message = "The price has to be positive")
 	private Double income;
 	private LocalDate birthDate;
 	private Integer children;
